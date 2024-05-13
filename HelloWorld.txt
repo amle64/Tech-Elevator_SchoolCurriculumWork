@@ -1,2 +1,2 @@
-Hello, Java Green. 
+Hello, Java Purple. 
 Welcome to NLR 21: May 2024!
