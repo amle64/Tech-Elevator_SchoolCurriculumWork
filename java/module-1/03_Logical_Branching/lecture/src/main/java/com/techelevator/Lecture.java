@@ -1,42 +1,49 @@
 package com.techelevator;
 
 public class Lecture {
+
+    /*public static void main(String[] args) {
+        returnNotOne();
+        returnNotHalf();
+    }*/
     /*
     1. This method is named returnNotOne and it returns an int. Change
     it so that it returns something other than a 1.
     */
-    public int returnNotOne() {
-        return 1;
+    public static int returnNotOne() {
+        //System.out.println(0);
+        return 0;
     }
 
     /*
     2. This method is named returnNotHalf and it returns a double. Change
     it so that it returns something other than a 0.5.
     */
-    public double returnNotHalf() {
-        return 0.5;
+    public static double returnNotHalf() {
+        //System.out.println(0.4);
+        return 0.4;
     }
 
     /*
     3. This method needs to return a String. Fix it to return a valid String.
     */
     public String returnName() {
-        return null;
+        return "hi";
     }
 
     /*
     4. This method currently returns an int. Change it so that it returns a double.
     */
-    public int returnDoubleOfTwo() {
-        return 2;
+    public double returnDoubleOfTwo() {
+        return 2.0;
     }
 
     /*
     5. This method should return the language that you're learning. Change
     it so that it does that.
     */
-    public boolean returnNameOfLanguage() {
-        return false;
+    public String returnNameOfLanguage() {
+        return "English";
     }
 
     /*

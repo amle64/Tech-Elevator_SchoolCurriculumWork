@@ -32,7 +32,14 @@ public class Exercise07_StoreHours {
     isStoreOpen(22) ➔ false
      */
     public boolean isStoreOpen(int currentHour) {
-        return false;
+        boolean open = true;
+        if (currentHour>=8 && currentHour <17){
+            open = true;
+        }
+        else {
+            open = false;
+        }
+        return open;
     }
 
     /*
@@ -57,7 +64,20 @@ public class Exercise07_StoreHours {
     isStoreOpen(12, 'S') ➔ false
      */
     public boolean isStoreOpen(int currentHour, char currentDay) {
-        return false;
+        boolean open = true;
+        if (currentDay == 'M' || currentDay == 'W' || currentDay == 'F'){
+            if (currentHour>=8 && currentHour <17){
+                open = true;
+            }
+            else {
+                open = false;
+            }
+        }
+        else {
+            open = false;
+        }
+
+        return open;
     }
 
 
@@ -75,6 +95,40 @@ public class Exercise07_StoreHours {
     isStoreOpen(9, 'S', true) ➔ true
      */
     public boolean isStoreOpen(int currentHour, char currentDay, boolean isSummer) {
-        return false;
+        boolean open = true;
+        if (isSummer == true){
+            if (currentDay == 'W' || currentDay == 'S'){
+                if (currentHour >= 8 && currentHour <20){
+                    open = true;
+                }
+                else {
+                    open = false;
+                }
+            }
+            else if (currentDay == 'M' || currentDay == 'F'){
+                if (currentHour>=8 && currentHour <17){
+                    open = true;
+                }
+                else {
+                    open = false;
+                }
+
+            } else {
+                open = false;
+            }
+        } else if (!isSummer){
+            if (currentDay == 'M' || currentDay == 'W' || currentDay == 'F'){
+                if (currentHour>=8 && currentHour <17){
+                    open = true;
+                }
+                else {
+                    open = false;
+                }
+            }
+            else {
+                open = false;
+            }
+        }
+        return open;
     }
 }

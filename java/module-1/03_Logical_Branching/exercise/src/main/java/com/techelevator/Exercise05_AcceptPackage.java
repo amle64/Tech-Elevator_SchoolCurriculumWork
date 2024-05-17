@@ -24,7 +24,12 @@ public class Exercise05_AcceptPackage {
     acceptPackage(50) ➔ false
      */
     public boolean acceptPackage(int weightPounds) {
-        return false;
+        if (weightPounds <= 40) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     /*
@@ -41,7 +46,12 @@ public class Exercise05_AcceptPackage {
     acceptPackage(50, 36, 24, 12) ➔ false
      */
     public boolean acceptPackage(int weightPounds, int lengthInches, int widthInches, int heightInches) {
-        return false;
+        int volume = lengthInches * widthInches * heightInches;
+        if (acceptPackage(weightPounds) == true && volume <= 10368) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /*
@@ -61,6 +71,38 @@ public class Exercise05_AcceptPackage {
     acceptPackage(50, 36, 24, 12) ➔ false
      */
     public boolean acceptPackage(int weightPounds, int lengthInches, int widthInches, int heightInches, boolean isSurchargePaid) {
-        return false;
+        boolean checkLength = lengthInches <= 66;
+        boolean checkWidth = widthInches <= 66;
+        boolean checkHeight = heightInches <= 66;
+        boolean status = false;
+        //cubic feet limit is 4 cubic feet
+        double volume = (lengthInches * widthInches * heightInches) / 1728.0;
+
+        //Check to see if weight is below 40lbs and cubic volume is less than 4 cubic feet
+        if (weightPounds <= 40 && volume <= 6) {
+
+            //Check if any dimension is less than 66 inches
+            if (checkLength == true && checkWidth == true && checkHeight == true) {
+                status = true;
+            }
+            else if (!checkLength || !checkWidth || !checkHeight){
+                if (isSurchargePaid== true){
+                    status = true;
+                }
+                else if (!isSurchargePaid){
+                    status = false;
+                }
+            }
+
+        }
+        else if (weightPounds >40 && volume <6){
+            status = false;
+        }
+        else if (weightPounds <40 && volume >6){
+            status = false;
+        }
+
+        return status;
     }
 }
+

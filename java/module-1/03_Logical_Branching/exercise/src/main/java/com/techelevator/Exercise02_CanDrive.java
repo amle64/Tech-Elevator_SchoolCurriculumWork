@@ -21,9 +21,12 @@ public class Exercise02_CanDrive {
     canDrive(false, false) ➔ false
      */
     public boolean canDrive(boolean hasPermit, boolean withLicensedPassenger) {
-        return false;
+        if (hasPermit == true && withLicensedPassenger == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
-
     /*
     In some states, the licensed passenger must be of a certain age.
     Implement the logic to return true if the person has a permit and is with a licensed passenger who is 21 or over.
@@ -34,20 +37,55 @@ public class Exercise02_CanDrive {
     canDrive(false, true, 23) ➔ false
      */
     public boolean canDrive(boolean hasPermit, boolean withLicensedPassenger, int passengerAge) {
-        return false;
+        if (hasPermit == true && withLicensedPassenger == true && passengerAge >= 21){
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     /*
     If the licensed passenger is the driver's legal guardian, they only have to be 18 instead of 21.
     Implement the logic to return true if the person has a permit and is with a licensed passenger.
-    The licensed passenger only needs to be 18 or older if they're the driver's guardian. Otherwise, the passenger must be 21 or older.
+    The licensed passenger only needs to be 18 or older if they're the driver's guardian.
+    Otherwise, the passenger must be 21 or older.
 
     Examples:
     canDrive(true, true, 22, false) ➔ true
     canDrive(true, true, 19, true) ➔ true
     canDrive(false, true, 23, true) ➔ false
      */
-    public boolean canDrive(boolean hasPermit, boolean withLicensedPassenger, int passengerAge, boolean isPassengerOurGuardian) {
-        return false;
+    public boolean canDrive(boolean hasPermit, boolean withLicensedPassenger,
+                            int passengerAge, boolean isPassengerOurGuardian) {
+        //initialize status to return after method ends
+        boolean status = false;
+        //Check to see if driver has permit
+        if (hasPermit == true) {
+            //Check to see if passenger is licensed
+            if (withLicensedPassenger == true) {
+                //If passenger is a guardian
+                if (isPassengerOurGuardian == true) {
+                    //Passing condition as long as passenger is at or above 18
+                    if (passengerAge >= 18) {
+                        status = true;
+                    }
+                }//If not a guardian
+                else {
+                    if (passengerAge >= 21) {
+                        status = true;
+                    }
+                }
+
+            } else if (withLicensedPassenger == false) {
+                status = false;
+            }
+        }// No permit
+        else {
+            status = false;
+        }
+        System.out.println(status);
+        return status;
+
     }
 }
