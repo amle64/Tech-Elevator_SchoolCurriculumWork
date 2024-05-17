@@ -25,7 +25,8 @@ public class Exercise04_Cards {
     getFirstCard(["K-C", "Q-D", "J-H", "10-S", "Q-C"]) → "K-C"
     */
     public String getFirstCard(String[] hand) {
-        return "";
+
+        return hand[0];
     }
 
     /*
@@ -42,7 +43,24 @@ public class Exercise04_Cards {
     discardFirstCard(["K-C", "Q-D", "J-H", "10-S", "Q-C"]) → ["Q-D", "J-H", "10-S", "Q-C"]
      */
     public String[] discardFirstCard(String[] hand) {
-        return new String[] {};
+        String[] secondHand = new String[hand.length-1];
+        System.out.println(secondHand.length);
+        int y = 0;
+        for (int i = 0; i < hand.length; i++) {
+            if (i==1){
+                //System.out.println("hello");
+                secondHand[y] = hand[i];
+                //System.out.println(secondHand[y]);
+                y++;
+            } else if (i>1){
+                secondHand[y] = hand[i];
+                y++;
+
+            }
+        }
+        //System.out.println(secondHand[0]);
+        //System.out.println(hand[0]);
+        return secondHand;
     }
 
     /*
@@ -61,6 +79,29 @@ public class Exercise04_Cards {
     discardTopCard([]) → []
      */
     public String[] discardTopCard(String[] remainingDeck) {
-        return new String[] {};
-    }    
+        if (remainingDeck.length ==0||remainingDeck.length==1) {
+
+            return new String[]{};
+
+        }  else {
+
+            String[] secondHand = new String[remainingDeck.length - 1];
+            int y = 0;
+                for (int i = 0; i < remainingDeck.length; i++) {
+                    if (i == 1) {
+                        //System.out.println("hello");
+                        secondHand[y] = remainingDeck[i];
+                        //System.out.println(secondHand[y]);
+                        y++;
+                    } else if (i > 1) {
+                        secondHand[y] = remainingDeck[i];
+                        y++;
+
+                    }
+                }
+                return secondHand;
+            }
+
+
+    }
 }

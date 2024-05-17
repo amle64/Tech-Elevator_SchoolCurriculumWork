@@ -25,7 +25,16 @@ public class Exercise05_Weather {
 	belowFreezing([]) → 0
     */
 	public int belowFreezing(int[] dailyHighs) {
-		return 0;
+        int count = 0;
+        if (dailyHighs.length==0){
+            return count;
+        }
+        for (int i = 0; i < dailyHighs.length; i++) {
+            if(dailyHighs[i]<=32){
+                count++;
+            }
+        }
+        return count;
 	}
 
     /*
@@ -43,7 +52,20 @@ public class Exercise05_Weather {
 	hottestDay([55]) → 55
     */
     public int hottestDay(int[] dailyHighs) {
-        return 0;
+        int highestTemp = 0;
+        if (dailyHighs.length==1){
+            return highestTemp = dailyHighs[0];
+        }
+        for (int i = 0; i < dailyHighs.length; i++) {
+            if (i==0){
+                highestTemp = dailyHighs[i];
+            } else if (dailyHighs[i]>highestTemp){
+                highestTemp = dailyHighs[i];
+            } /*else if (dailyHighs[i]<highestTemp&&dailyHighs.length==i+1){
+                return highestTemp
+            }*/
+        }
+        return highestTemp;
     }
 
     /*
@@ -61,6 +83,28 @@ public class Exercise05_Weather {
 	fixTemperatures([]) → []
      */
     public int[] fixTemperatures(int[] temperatures) {
-        return new int[] {};
+        int[] correctTemps = new int [temperatures.length];
+        //int count = 0;
+
+        //For empty arrays
+        if(temperatures.length==0){
+            return temperatures;
+        }
+
+        for (int i = 0; i < temperatures.length; i++) {
+
+            int remainder = (i+2)%2;
+            //If remainder == 0, then we start at index 1 and alternate after 2 indexes (even numbers)
+            if (remainder==0){
+                correctTemps[i] = temperatures[i]+2;
+            }
+            //When index is an odd number
+            else {
+                correctTemps[i] = temperatures[i];
+            }
+            //System.out.println("temperature is "+temperatures[i]+"correct temp is "+correctTemps[i]);
+        }
+
+        return correctTemps;
     }
 }

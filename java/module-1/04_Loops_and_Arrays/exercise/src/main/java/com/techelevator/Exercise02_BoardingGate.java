@@ -27,7 +27,12 @@ public class Exercise02_BoardingGate {
     generateSeatingChart(2) → [AVAILABLE, AVAILABLE]
      */
     public boolean[] generateSeatingChart(int numberOfSeats) {
-        return new boolean[] {};
+        boolean seats[] = new boolean [numberOfSeats];
+        for (int i = 0; i < seats.length; i++) {
+            seats[i] = AVAILABLE;
+
+        }
+        return seats;
     }
 
     /*
@@ -46,7 +51,14 @@ public class Exercise02_BoardingGate {
     getAvailableSeatCount([]) → 0
      */
     public int getAvailableSeatCount(boolean[] seatingChart) {
-        return 0;
+        int count = 0;
+        for (int i = 0; i < seatingChart.length; i++) {
+            if (seatingChart[i]==AVAILABLE){
+                count++;
+            }
+
+        }
+        return count;
     }
 
     /*
@@ -62,7 +74,48 @@ public class Exercise02_BoardingGate {
     getNumberOfFullRows([OCCUPIED, AVAILABLE, AVAILABLE, OCCUPIED, AVAILABLE, AVAILABLE]) → 0
      */
     public int getNumberOfFullRows(boolean[] seatingChart) {
-        return 0;
+        int count = 0;
+
+        for (int i = 0; i < seatingChart.length; i++) {
+            if(i == seatingChart.length-1){
+                i++;
+            } else {
+                if (i < seatingChart.length - 1) {
+                    if (seatingChart[i]== false && seatingChart[i] == seatingChart[i + 1]) {
+                        if(count==0){
+                            count++;
+                        }
+                        count++;
+                    }
+                }
+
+
+
+            }
+          //System.out.println("i: "+i);
+          //System.out.println("Count ="+count);
+        }
+        int row = 0;
+
+        row = count/3;
+
+        System.out.println("Row is" +row);
+        return row;
+
     }
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
