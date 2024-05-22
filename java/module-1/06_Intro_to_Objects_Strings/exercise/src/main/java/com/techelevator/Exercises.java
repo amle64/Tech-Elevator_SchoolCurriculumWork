@@ -511,7 +511,13 @@ public class Exercises {
      stringBits("Heeololeo") → "Hello"
      */
 	public String stringBits(String str) {
-		return null;
+		String word = "";
+		for (int i = 0; i < str.length(); i++) {
+			if ((i%2==0)){
+				word = word+str.charAt(i);
+			}
+		}
+		return word;
 	}
 
 	/*
@@ -521,7 +527,13 @@ public class Exercises {
      stringSplosion("ab") → "aab"
      */
 	public String stringSplosion(String str) {
-		return null;
+		String word = "";
+		int x = str.length();
+		for (int i = 0; i <= str.length(); i++) {
+			word = word+str.substring(0,i);
+
+		}
+		return word;
 	}
 
 	/*
@@ -538,7 +550,25 @@ public class Exercises {
      last2("xxxx") -> 2
      */
 	public int last2(String str) {
-		return 0;
+		if (str.length()<=2){
+			return 0;
+		}
+		String endSub = str.substring(str.length()-2,str.length());
+		//System.out.println(endSub+" for : "+str);
+		int count = 0;
+
+		for (int i = 0; i < str.length(); i++) {
+
+			//Add count for when repeating last 2 chars are found
+			if (str.substring(i,i+2).equals(endSub)){
+				//Break loop
+				if (i==str.length()-2){
+					break;
+				}
+				count++;
+			}
+		}
+		return count;
 	}
 
 	/*
@@ -549,7 +579,36 @@ public class Exercises {
      stringX("xabxxxcdx") → "xabcdx"
      */
 	public String stringX(String str) {
-		return null;
+		//Edge case for short lengths
+		if (str.length()<=2){
+			return str;
+		}
+
+		String[] word = new String[str.length()];
+		//Remove x and create word array
+		word = str.split("x");
+		String finalWord = "";
+
+		//If x is found on first or last character
+		if(str.charAt(0)=='x'||str.charAt(str.length()-1)=='x'){
+			for (int i = 0; i < word.length; i++) {
+				if(i>0&&i<str.length()-1){
+					if(!word[i].equals("")){
+						finalWord = finalWord+word[i];
+					}
+				}
+			}
+			finalWord = 'x'+finalWord+'x';
+		//If no x is on first or last character
+		}else {
+			for (int i = 0; i < word.length; i++) {
+				if(!word[i].equals("")){
+					finalWord = finalWord+word[i];
+				}
+			}
+		}
+		//System.out.println("str is "+str);
+		return finalWord;
 	}
 
 	/*
@@ -559,7 +618,14 @@ public class Exercises {
      altPairs("CodingHorror") → "Congrr"
      */
 	public String altPairs(String str) {
-		return null;
+		String result = "";
+		for (int i = 0; i < str.length(); i++) {
+			if(i%4==0||i%4==1){
+				result+=str.charAt(i);
+
+			}
+		}
+		return result;
 	}
 
 	/*
@@ -570,7 +636,15 @@ public class Exercises {
      stringYak("yak123ya") → "123ya"
      */
 	public String stringYak(String str) {
-		return null;
+		int positionYak = str.indexOf("yak");
+
+		str = str.substring(0,positionYak)+str.substring(positionYak+3);
+
+		while (positionYak!=-1){
+			str = str.substring(0,positionYak)+str.substring(positionYak+3);
+			positionYak = str.indexOf("yak");
+		}
+		return str;
 	}
 
 }

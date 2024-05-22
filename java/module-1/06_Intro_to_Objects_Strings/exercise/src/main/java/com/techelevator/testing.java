@@ -2,25 +2,44 @@ package com.techelevator;
 
 public class testing {
     public static void main(String[] args) {
-        //12345x
-        //12345
-        System.out.println(doubleX("12345x"));
-        System.out.println(doubleX("12345"));
+        /*stringX("xxHxix") → "xHix"
+        stringX("abxxxcd") → "abcd"
+        stringX("xabxxxcdx") → "xabcdx"*/
+        //printArray(stringX("xxHxix"));
+        //printArray(stringX("abxxxcd"));//doesn't split
+        System.out.println(stringX("xxHxix"));
+        System.out.println(stringX("xabxxxcdx"));
+        System.out.println(stringX("abxxxcd")); //GOOD
     }
-    public static boolean doubleX(String str) {
-        String sub = "xx";
-        if (str.length()<2){
-            return false;
+
+        public static String stringX(String str) {
+            String[] word = new String[str.length()];
+            word = str.split("x");
+            String finalWord = "";
+            if(str.charAt(0)=='x'||str.charAt(str.length()-1)=='x'){
+                for (int i = 0; i < word.length; i++) {
+                    if(i>0&&i<str.length()-1){
+                        if(!word[i].equals("")){
+                            finalWord = finalWord+word[i];
+                        }
+                    }
+                }
+                finalWord = 'x'+finalWord+'x';
+
+            }else {
+                for (int i = 0; i < word.length; i++) {
+                    if(!word[i].equals("")){
+                        finalWord = finalWord+word[i];
+                    }
+                }
+            }
+            System.out.println("str is "+str);
+            return finalWord;
         }
-        for (int i = 0; i < str.length(); i++) {
-            if(i+1==str.length()){
-                return false;
-            }else if (str.charAt(i)=='x'&&str.charAt(i+1)!='x'){
-                return false;
-            } else if(str.substring(i,i+2).equals(sub)){
-                return true;
+        public static void printArray (String [] array){
+            for (int i = 0; i < array.length; i++) {
+                System.out.println("array["+i+"]"+array[i]);
             }
         }
-        return false;
     }
-}
+
