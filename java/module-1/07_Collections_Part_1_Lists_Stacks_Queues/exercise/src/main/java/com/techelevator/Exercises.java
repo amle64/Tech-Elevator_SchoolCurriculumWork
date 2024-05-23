@@ -81,13 +81,7 @@ public class Exercises {
 		}
 		return doubleList;
 	}
-	/*public static void main(String[] args) {
-		Exercises exercise = new Exercises();
-		//List<String> list = exercise.no4LetterWords(new String[]{"Train", "Boat", "Car"});
-		List<String> list2 = exercise.findLargest(List<Integer> {11, 200, 43, 84, 9917, 4321, 1, 33333, 8997});
-		System.out.println(list2);
 
-	}*/
 	/*
 	 Given a List of Integers, return the largest value.
 	 findLargest( [11, 200, 43, 84, 9917, 4321, 1, 33333, 8997] ) -> 33333
