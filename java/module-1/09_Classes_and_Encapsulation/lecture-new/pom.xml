@@ -5,12 +5,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.techelevator</groupId>
+<<<<<<< HEAD
     <artifactId>lecture-new</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
+=======
+    <artifactId>lecture-3</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+>>>>>>> 08a4d07b2f0eeed4e09a4a82ef76a39f5ebab465
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

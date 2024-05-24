@@ -1,6 +1,7 @@
 package com.techelevator;
 
 public class Person {
+<<<<<<< HEAD
     private String name;
     private String ssn;
 
@@ -24,4 +25,17 @@ public class Person {
         this.name = name;
         this.ssn = ssn;
     }
+=======
+
+    private String name;
+
+    private String ssn;
+
+    public Person(String name, String ssn) {
+        this.name = name;
+        this.ssn = ssn;
+    }
+
+
+>>>>>>> 08a4d07b2f0eeed4e09a4a82ef76a39f5ebab465
 }
