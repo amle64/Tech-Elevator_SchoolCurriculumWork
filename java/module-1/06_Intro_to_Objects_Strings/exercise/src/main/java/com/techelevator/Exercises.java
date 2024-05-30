@@ -411,6 +411,7 @@ public class Exercises {
 					String.valueOf(str.charAt(i+1)).equals("a")&&
 					String.valueOf(str.charAt(i+2)).equals("d")&&(i<2)){
 				return true;
+
 			}
 		}
 		return false;
