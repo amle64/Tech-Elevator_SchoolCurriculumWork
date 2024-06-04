@@ -3,8 +3,8 @@ package com.techelevator;
 public class NonStart {
 
     /*
-     * Given 2 strings, return their concatenation, except omit the first char of each. The strings will
-     * be at least length 1.
+     * Given 2 strings, return their concatenation, except omit the
+     * first char of each. The strings will be at least length 1.
      */
     public String getPartialString(String a, String b) {
         if (a == null) {

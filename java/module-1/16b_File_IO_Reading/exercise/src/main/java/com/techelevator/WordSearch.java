@@ -71,7 +71,18 @@ public class WordSearch {
 	 * @throws IOException thrown if file could not be read or other related error
 	 */
 	public List<String> getMatchingLines(File file, String searchTerm, boolean isCaseSensitive, boolean includeLineNumbers) throws IOException {
+		List<String> matchingLines = new ArrayList<>();
 
+		int lineNumber = 1;
+		try (Scanner inputScanner = new Scanner(file)){
+			while (inputScanner.hasNextLine()){
+				String line = inputScanner.nextLine();
+				if()
+				lineNumber++;
+			}
+		} catch (IOException e){
+			throw e;
+		}
 		return new ArrayList<>();
 
 	}
@@ -83,6 +94,15 @@ public class WordSearch {
 	 */
 	public boolean isFileValid(String path) {
 
+		File inputFile = new File(path);
+		if (!inputFile.exists()){
+			System.out.println(path+" does not exist");
+			return false;
+		}
+		if (!inputFile.isFile())
+		{	System.out.println(path+" is not a file");
+			return false;
+		}
 		return true;
 
 	}
