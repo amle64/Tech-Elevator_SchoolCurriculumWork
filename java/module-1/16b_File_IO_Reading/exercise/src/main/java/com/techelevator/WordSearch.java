@@ -77,13 +77,24 @@ public class WordSearch {
 		try (Scanner inputScanner = new Scanner(file)){
 			while (inputScanner.hasNextLine()){
 				String line = inputScanner.nextLine();
-				if()
+				String [] wordsArray = line.split(" ");
+
+				boolean matches = isCaseSensitive ? line.contains(searchTerm) : line.toLowerCase().contains(searchTerm.toLowerCase());
+				if(matches){
+					if(includeLineNumbers){
+						//String quotes = "";
+						matchingLines.add(lineNumber+") "+line);
+					} else {
+						matchingLines.add(line);
+					}
+
+				}
 				lineNumber++;
 			}
 		} catch (IOException e){
 			throw e;
 		}
-		return new ArrayList<>();
+		return matchingLines;
 
 	}
 

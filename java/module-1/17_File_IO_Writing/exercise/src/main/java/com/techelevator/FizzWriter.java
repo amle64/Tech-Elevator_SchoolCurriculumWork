@@ -3,6 +3,7 @@ package com.techelevator;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class FizzWriter {
@@ -61,6 +62,28 @@ public class FizzWriter {
      * @throws IOException thrown if file could not be read, written, or other related error
      */
     public void writeFizzBuzzFile(File destinationFile, int startNumber, int endNumber, String fizzValue, String buzzValue) throws IOException {
+        //System.out.println("testing");
+        PrintWriter destinationWriter = new PrintWriter(destinationFile);
+        //1,2,fizz,4,buzz,fizz,
+        for (int i = startNumber; i <= endNumber;  i++) {
+            boolean isDivisibleBy5 = i%5 ==0;
+            boolean isDivisibleBy3 = i%3 ==0;
+
+            if (isDivisibleBy3==true&&isDivisibleBy5==true){
+                destinationWriter.println(fizzValue+buzzValue);
+            } else if(isDivisibleBy3==true){
+                destinationWriter.println(fizzValue);
+            } else if (isDivisibleBy5==true){
+                destinationWriter.println(buzzValue);
+            } else {
+                destinationWriter.println(i);
+            }
+
+
+        }
+        destinationWriter.flush();
+        destinationWriter.close();
+
 
 	}
 
