@@ -47,7 +47,7 @@ public class QuizMaker {
 						matchingLines.add(lineNumber+") "+line);
 					} else {
 						matchingLines.add(line);
-					}git add
+					}
 
 				}
 
