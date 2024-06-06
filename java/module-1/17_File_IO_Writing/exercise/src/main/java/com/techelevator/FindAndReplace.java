@@ -3,6 +3,9 @@ package com.techelevator;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class FindAndReplace {
@@ -67,6 +70,47 @@ public class FindAndReplace {
      */
     public void writeReplacedTextFile(File sourceFile, File destinationFile, String searchTerm, String replacementTerm) throws IOException {
 
+        //Use to print strings to the destination file
+        PrintWriter resultFile = new PrintWriter(destinationFile);
+
+        //Use scanner to read the sourceFile
+        try (Scanner scanner = new Scanner(sourceFile)){
+            while(scanner.hasNextLine()){
+                String line = scanner.nextLine();
+                List<String> wordList = new ArrayList<>(Arrays.asList(line.split(" ")));
+               // String line = scanner.nextLine();
+                //String [] wordArray= line.split(" ");
+
+                /*//maybe remove?
+                String [] searchTermArray = searchTerm.split(" ");*/
+
+                //String [] wordArray2 = new String[wordArray.length+ searchTermArray.length];*/
+
+
+                boolean match = line.contains(searchTerm);
+                if (match){
+                    for (int i = 0; i < wordList.size(); i++) {
+                        String currentString = wordList.get(i);
+                        if(currentString.indexOf(searchTerm)!=-1){
+                            wordList.set(i,currentString.replace(searchTerm,replacementTerm));
+                        }
+                    }
+                    line = String.join(" ",wordList);
+
+                }
+                resultFile.println(line);
+
+
+
+
+            }
+        //If no file to read, catch exception
+        } catch (IOException e) {
+            throw e;
+        }
+
+        resultFile.flush();
+        resultFile.close();
     }
 
     /**
