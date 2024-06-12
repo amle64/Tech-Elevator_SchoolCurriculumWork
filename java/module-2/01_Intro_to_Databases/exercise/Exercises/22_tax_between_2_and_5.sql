@@ -2,3 +2,8 @@
 -- Order the results by sales tax, lowest first.
 -- (15 rows)
 
+SELECT state_name, sales_tax
+FROM state
+WHERE sales_tax >= 2 AND sales_tax <= 5
+ORDER BY sales_tax ASC
+LIMIT 15;

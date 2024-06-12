@@ -2,3 +2,8 @@
 -- Order the results by population, smallest first.
 -- (37 rows)
 
+SELECT city_name, population
+FROM city
+WHERE population < 150000 AND state_abbreviation = 'CA'
+ORDER BY population ASC
+LIMIT 37;

@@ -2,3 +2,8 @@
 -- Order the results by state abbreviation alphabetically (A-Z), then by populatuon (highest first).
 -- (22 rows)
 
+SELECT city_name, state_abbreviation, population
+FROM city
+WHERE state_abbreviation IN ('CO','AZ')
+ORDER BY state_abbreviation ASC, population DESC
+LIMIT 22;
