@@ -62,5 +62,5 @@ CREATE TABLE eventMembers
 	CONSTRAINT fk_memberid FOREIGN KEY (member_id) REFERENCES members (member_id)
 );
 
-
+--testingDatabase file is the file with all of the testable data
 COMMIT;
