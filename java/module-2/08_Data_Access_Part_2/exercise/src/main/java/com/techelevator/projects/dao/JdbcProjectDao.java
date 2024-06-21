@@ -72,6 +72,9 @@ public class JdbcProjectDao implements ProjectDao {
 	}
 	@Override
 	public int deleteProjectById(int projectId) {
+		int numberOfRows = 0;
+		String projectEmplo
+
 		throw new DaoException("deleteProjectById() not implemented");
 	}
 	

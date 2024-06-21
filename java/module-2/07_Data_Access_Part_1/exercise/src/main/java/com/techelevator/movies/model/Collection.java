@@ -2,6 +2,7 @@ package com.techelevator.movies.model;
 
 public class Collection {
 
+    private Long collectionId;
     private int id;
     private String name;
 
@@ -12,6 +13,7 @@ public class Collection {
         this.id = id;
         this.name = name;
     }
+
 
     public int getId() {
         return id;
