@@ -1,35 +1,35 @@
 Bug 1
 -----
 Test that demonstrates problem:
-
+-getTimesheetsByEmployeeId_with_invalid_employee_id_returns_empty_list_of_timesheets();
 Expected output:
-
+-Test should be able to return null when invalid employeeId has been entered.
 Actual output:
-
+-Empty array list is shown.
 How did you fix this bug?
-
+-Updated the return statement in the method to check if the timesheet is empty as a ternary operator.
 
 Bug 2
 -----
 Test that demonstrates problem:
-
+-etTimesheetsByProjectId_with_invalid_project_id_returns_empty_list_of_timesheets()
 Expected output:
-
+-Test should be able to return null when invalid projectId has been entered.
 Actual output:
-
+-Empty list is shown.
 How did you fix this bug?
-
+-Updated the return statement in the method to check if the timesheet is empty as a ternary operator.
 
 Bug 3
 -----
 Test that demonstrates problem:
-
+-getBillableHours_returns_correct_total() (Bug occurs for getBillableHours() method)
 Expected output:
-
+-Billable hours (double) should be 0. I can get billable hours for things that are considered false...
 Actual output:
-
+-Matches what is found in the timesheet
 How did you fix this bug?
-
+-Updated the method's parameters and interface's parameters for the getBillableHours() method.
 
 Bug 4
 -----

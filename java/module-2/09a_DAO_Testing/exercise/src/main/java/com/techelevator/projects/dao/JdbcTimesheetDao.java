@@ -41,6 +41,7 @@ public class JdbcTimesheetDao implements TimesheetDao {
     @Override
     public List<Timesheet> getTimesheetsByEmployeeId(int employeeId) {
         List<Timesheet> timesheets = new ArrayList<>();
+
         String sql = "SELECT timesheet_id, employee_id, project_id, date_worked, hours_worked, billable, description " +
                 "FROM timesheet " +
                 "WHERE employee_id = ? " +
@@ -55,8 +56,9 @@ public class JdbcTimesheetDao implements TimesheetDao {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
+
         }
-        return timesheets;
+        return timesheets.isEmpty() ? null : timesheets;
     }
 
     @Override
@@ -77,7 +79,7 @@ public class JdbcTimesheetDao implements TimesheetDao {
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
-        return timesheets;
+        return timesheets.isEmpty() ? null : timesheets;
     }
 
     @Override
@@ -134,7 +136,11 @@ public class JdbcTimesheetDao implements TimesheetDao {
     }
 
     @Override
-    public double getBillableHours(int employeeId, int projectId) {
+    public double getBillableHours(int employeeId, int projectId,boolean billable) {
+        if(!billable){
+            return 0;
+        }
+
         double billableHours = 0;
         String sql = "SELECT SUM(hours_worked) AS billable_hours " +
                 "FROM timesheet " +
