@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-
+@RequestMapping("/auctions")
 public class AuctionController {
 
     private AuctionDao auctionDao;
@@ -21,29 +21,49 @@ public class AuctionController {
         this.auctionDao = new MemoryAuctionDao();
     }
 
-    @RequestMapping(path="/auctions", method = RequestMethod.GET)
-    public List<Auction> list(){
-
-        List <Auction> auctions = auctionDao.getAuctions();
-        return auctions;
-    }
-
-    /*@GetMapping
-    public Auction get(@RequestParm Integer id){
-
-        try{
-            return auctionDao.getAuctionById(id);
-        } catch(Exception e){
-            return null;
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Auction> list(
+            @RequestParam (value = "title_like", required = false) String title_like,
+            @RequestParam (value = "currentBid_lte", required = false) Double currentBid_lts)
+            {
+        //Price and title provided
+        if(title_like != null && !title_like.isEmpty()&& currentBid_lts != null){
+            return auctionDao.getAuctionsByTitleAndMaxBid(title_like, currentBid_lts);
+        }
+        //title provided
+        else if (title_like != null && !title_like.isEmpty()){
+            return auctionDao.getAuctionsByTitle(title_like);
+        }
+        //Price provided
+        else if (currentBid_lts != null){
+            return auctionDao.getAuctionsByMaxBid(currentBid_lts);
+            }
+        else {
+            List <Auction> auctions = auctionDao.getAuctions();
+            return auctions;
         }
 
-        //return null;
-    }*/
+
+
+    }
+
+
+    @RequestMapping(path="{id}",method = RequestMethod.GET)
+    public Auction get(@PathVariable int id){
+        return auctionDao.getAuctionById(id);
+
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public Auction create(@RequestBody Auction newAuction){
+        if (newAuction != null) {
+            auctionDao.createAuction(newAuction);
+            return newAuction;
+        }
+        return null;
+    }
 
 
 
-    /*@Override
-    public List<Auction> getAuctions() {
-        return auctions;
-    }*/
+
 }
