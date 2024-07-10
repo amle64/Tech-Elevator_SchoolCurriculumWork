@@ -1,0 +1,31 @@
+header{
+    color:rgb(11, 29, 196);
+    margin-left: 10px;
+    text-align: center;
+    font-size: 60px;
+}
+img{
+    
+}
+
+body{
+    background-color: lightblue;
+}
+
+h1 {
+    color:rgb(11, 29, 196);
+    margin-left: 10px;
+    text-align: center;
+}
+h2{
+    text-decoration: underline;
+}
+
+p{
+    text-align:center;
+    font-size: 20px; 
+}
+
+section#quotes-section{
+    font-style: italic;
+}
