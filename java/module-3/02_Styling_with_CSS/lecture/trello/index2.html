@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #divOne {
+            background-color: green;
+        }
+        .testdiv {
+            background-color: red;
+        }
+        div ul>li{
+            background-color: orange;
+        }
+        ul :first-child{
+            background-color: yellow;
+        }
+        ol :nth-child(3){
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id='divOne'>
+        <ul>
+        <li>
+        Coffee
+        </li>
+        <li>
+        Tea
+        </li>
+        <li>
+        Milk
+        </li>
+        </ul>
+        </div>
+        
+    <div class='testdiv'>
+        <ol>
+        <li>
+        Coffee2
+         </li>
+         <li>
+         Tea2
+        </li>
+        <li>
+        Milk2
+        </li>
+        </ol>
+        </div>    
+</body>
+</html>
