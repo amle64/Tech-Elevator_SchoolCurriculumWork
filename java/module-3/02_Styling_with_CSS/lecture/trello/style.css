@@ -1,0 +1,55 @@
+div.trello-list{
+    display: inline-block;
+    width: 300px;
+    background-color: #DDD;
+    vertical-align: top;
+}
+
+div.trello-list li{
+    background-color: white;
+    font-size: .9rem;
+    margin-bottom:10px;
+    padding: 8px;
+    list-style:none;
+    white-space: normal;
+
+
+}
+
+header h1, header p{
+    display: inline-block;
+    padding: 20px;
+
+}
+
+.labels span{
+    display: inline-block;
+    width: 35px;
+    height: 8px;
+    border-radius: 5px;
+}
+
+.pathway{
+    background-color:red;
+}
+.individual{
+    background-color: green;
+}
+.pair{
+    background-color: teal;
+}
+.general{
+    background-color: orange;
+}
+header{
+    position: fixed;
+    top: 0;
+    height: 50px;
+}
+body{
+    white-space: nowrap;
+    font-family: 'Raleway', sans-serif;
+    background-image: linear-gradient(to bottom, #858C90, #BBB);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}

@@ -13,11 +13,18 @@ body {
 
 img {
   display: block;
+  
 }
 
 ul {
   margin: 0;
   padding: 0;
+}
+
+main {
+  margin-left:200px;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 aside{
@@ -34,6 +41,9 @@ aside img{
   
   
 }
+aside nav ul li:nth-child(1) a {
+  text-decoration: underline;
+}
 
 aside li{
   text-align: center;
@@ -48,10 +58,33 @@ aside li{
 
 aside li a{
   font-weight: bold;
-  color: rgba(0,173,238,0.4);
+  color: #00ADEE;
   text-decoration:none;
 }
 
-main {
-  margin-left:200px
+header img{
+  height:100px;
+  padding-bottom: 10px;
+}
+
+img.banner{
+  width:90vw;
+}
+
+div{
+  width: 33%;
+}
+section {
+  display: flex; /* Use flexbox */
+  justify-content: space-around; /* Optional: space them out evenly */
+}
+
+section > div {
+  flex: 1; /* Optional: allow divs to grow equally */
+  margin: 10px; /* Optional: add some spacing */
+  padding: 10px;
+  
+}
+i {
+  padding-top: 10px;
 }

@@ -1,0 +1,40 @@
+body {
+    display: grid;
+
+    grid-template-columns: 1fr 2fr 1fr;
+
+    grid-template-areas:
+
+        "header header header"
+        "nav main aside"
+        "footer footer footer";
+
+    margin: 20px 200px;
+
+    gap: 10px;
+
+    }
+
+    header {
+        grid-area: header;
+        background-color: greenyellow;
+    }
+    nav {
+        grid-area: nav;
+        background-color: oldlace;
+    }
+
+    main{
+        grid-area: main;
+        background-color: orange;
+    }
+
+    aside{
+        grid-area: aside;
+        background-color: lightblue;
+    }
+
+    footer{
+        grid-area: footer;
+        background-color: lightseagreen;
+    }
