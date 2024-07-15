@@ -18,7 +18,23 @@ ul.social-icons {
 
 nav {}
 
-#right-panel {}
+#right-panel {
+  display:none;
+}
+
+/* step 1*/
+
+body{
+  display:flex;
+}
+
+/* step 2 */
+
+#left-panel {
+  display:flex;
+  flex-direction: column;
+  
+}
 
 /* YOU WON'T NEED TO CHANGE ANY STYLES BELOW THIS LINE */
 

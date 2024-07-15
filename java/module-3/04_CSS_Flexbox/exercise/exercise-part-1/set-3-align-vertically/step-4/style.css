@@ -16,3 +16,10 @@ body {
   border: solid 1px #777;
 }
 
+/* edits */
+
+.container{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
