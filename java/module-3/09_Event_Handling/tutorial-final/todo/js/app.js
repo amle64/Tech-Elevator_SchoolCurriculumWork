@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
   completeAll.addEventListener('click', () => {
     tasks.forEach((task) => {
       task.classList.add('completed');
-      task.querySelector('i').classList.add('completed');
+     // task.querySelector('i').classList.add('completed');
     });
   });
 });

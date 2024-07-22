@@ -37,8 +37,73 @@ function displayGroceries() {
   });
 }
 
+function updateButtonText() {
+  const completeButton = document.getElementById('toggleAll');
+  if (allItemsIncomplete) {
+    completeButton.textContent = 'Mark All Complete';
+  } else {
+    completeButton.textContent = 'Mark All Incomplete';
+  }
+}
 
 document.addEventListener('DOMContentLoaded',()=> {
   setPageTitle();
   displayGroceries();
-})
+
+  //Variable tasks is all of the grocery items
+  const tasks = document.querySelectorAll('li');
+
+  //Access the grocery item for the array
+  tasks.forEach((task)=>{
+
+    //Add eventListener for click that denotes completed task
+    //Crossed line and green circle
+    task.addEventListener('click',()=>{
+      if(!task.classList.contains('completed')){
+        task.classList.add('completed');
+        task.querySelector('i').classList.add('completed');
+      }
+    })
+
+    //Add eventListener for double click to undo completed task
+    //Undo action
+    task.addEventListener('dblclick',()=>{
+
+      if(task.classList.contains('completed')){
+        task.classList.remove('completed');
+        task.querySelector('i').classList.remove('completed');
+      }
+    })
+
+          
+    })
+
+    
+    //Variable for the MarkAllComplete
+    const completeButton = document.querySelector('#toggleAll.btn');
+
+    //Add eventListener for click to cross all items and green circle
+    completeButton.addEventListener('click',()=>{
+      
+      if(allItemsIncomplete){
+        tasks.forEach((task) => {
+          task.classList.add('completed');
+          task.querySelector('i').classList.add('completed');
+        });
+        completeButton.textContent = 'Mark All Incomplete';
+        allItemsIncomplete = false;
+        return;
+      } else {
+        tasks.forEach((task) => {
+          task.classList.remove('completed');
+          task.querySelector('i').classList.remove('completed');
+          completeButton.textContent = 'Mark All Complete';
+          allItemsIncomplete = true;
+          return;
+        });
+      }
+  });
+
+
+
+});
