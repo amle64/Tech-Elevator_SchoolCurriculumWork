@@ -3,7 +3,9 @@
     <thead>
     <tr>
         <th>First Name</th>
+        
         <th>Last Name</th>
+        
         <th>Username</th>
         <th>Email Address</th>
         <th>Status</th>
@@ -11,12 +13,12 @@
     </thead>
     <tbody>
       <tr>
-        <td><input type="text" id="firstNameFilter"/></td>
-        <td><input type="text" id="lastNameFilter"/></td>
-        <td><input type="text" id="usernameFilter"/></td>
-        <td><input type="text" id="emailFilter"/></td>
+        <td><input type="text" v-model="search.firstName" placeholder="Filter by First Name" id="firstNameFilter"/></td>
+        <td><input type="text" v-model="search.lastName" id="lastNameFilter"/></td>
+        <td><input type="text" v-model="search.username" id="usernameFilter"/></td>
+        <td><input type="text" v-model="search.emailAddress" id="emailFilter"/></td>
         <td>
-          <select id="statusFilter">
+          <select v-model="search.status" id="statusFilter">
             <option value="">Show All</option>
             <option value="Active">Active</option>
             <option value="Inactive">Inactive</option>
@@ -24,6 +26,18 @@
         </td>
       </tr>
       <!-- user listing goes here -->
+      <tr
+        v-for="user in filteredList" 
+        v-bind:key="user"
+        v-bind:class="{inactive:user.status==='Inactive'}"
+        >
+        <td>{{ user.firstName }} </td>   
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.emailAddress }}</td>
+        <td>{{ user.status }}</td>
+    </tr>
+        
     </tbody>
   </table>
 </template>
@@ -32,6 +46,13 @@
 export default {
   data() {
     return {
+      search:{
+        firstName:'',
+        lastName:'',
+        username:'',
+        emailAddress:'',
+        status:''
+      },
       users: [
         { firstName: 'John', lastName: 'Smith', username: 'jsmith', emailAddress: 'jsmith@gmail.com', status: 'Active' },
         { firstName: 'Anna', lastName: 'Bell', username: 'abell', emailAddress: 'abell@yahoo.com', status: 'Active' },
@@ -41,6 +62,40 @@ export default {
         { firstName: 'Mark', lastName: 'Smith', username: 'msmith', emailAddress: 'msmith@foo.com', status: 'Inactive' }
       ]
     }
+  },
+  computed:{
+    filteredList(){
+      let filteredUsers = this.users;
+      if(this.search.firstName != ""){
+        filteredUsers = filteredUsers.filter((user)=>
+          user.firstName.toLowerCase().includes(this.search.firstName.toLowerCase())
+          
+        );
+      }
+      if(this.search.lastName != ""){
+        filteredUsers = filteredUsers.filter((user)=>
+        user.lastName.toLowerCase().includes(this.search.lastName.toLowerCase())
+        );
+      }
+      if(this.search.username != ""){
+        filteredUsers = filteredUsers.filter((user)=>
+        user.username.toLowerCase().includes(this.search.username.toLowerCase())
+        );
+      }
+      if(this.search.emailAddress != ""){
+        filteredUsers = filteredUsers.filter((user)=>
+        user.emailAddress.toLowerCase().includes(this.search.emailAddress.toLowerCase())
+        );
+      }
+      if(this.search.status != ""){
+        filteredUsers = filteredUsers.filter((user)=>
+        user.status === this.search.status
+      );
+    }
+      
+      return filteredUsers;
+    }
+    
   }
 }
 </script>

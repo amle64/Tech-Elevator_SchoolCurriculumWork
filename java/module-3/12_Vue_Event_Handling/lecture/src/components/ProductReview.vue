@@ -35,6 +35,56 @@
         5 Star Review{{ numberOfFiveStarReviews === 1 ? '' : 's' }}
       </div>
     </div>
+<!-- test -->
+<a href="#" 
+v-on:click="showForm= true" 
+v-if="showForm === false" >Show Form</a>
+<!-- <br>
+Reviewer: {{ newReview.reviewer }}
+<br>
+Title: {{ newReview.title }}
+<br>
+Rating: {{ newReview.rating }}
+<br>
+Review: {{ newReview.review }} -->
+
+<form v-on:submit.prevent="addNewReview" v-show="showForm">
+  <div class = "form-element">
+    <label for="reviewer"> Name:    </label>
+    <input id = "reviewer" type="text" v-model="newReview.reviewer">
+  </div>
+
+  <div class = "form-element">
+    <label for="title"> Title:    </label>
+    <input id = "title" type="text" v-model="newReview.title">
+  </div>
+  
+  <div class="form-element">
+    
+    <label for="rating"> Rating:    </label>
+    <select id = "rating" v-model.number="newReview.rating">
+      <option value="1">1 Star</option>
+      <option value="2">2 Star</option>
+      <option value="3">3 Star</option>
+      <option value="4">4 Star</option>
+      <option value="5">5 Star</option>
+    </select>
+    
+  </div>
+
+  <div class = "form-element">
+    <label for="review">Review:</label>
+    <textarea  id="review" cols="30" rows="10" v-model="newReview.review"></textarea>
+  </div>
+
+  <input type="submit" value="Save">
+  <input type="button" value="Cancel" >
+  
+</form>
+
+
+<!-- <div v-on:click=testCountMethod> test1: {{ testCount1 }}  </div>
+<div v-on:click="testCount2=testCount2+1"> test2: {{ testCount2 }}  </div> -->
 
     <div
       class="review"
@@ -72,6 +122,9 @@ export default {
       description:
         'A brain friendly guide to building extensible and maintainable object-oriented software.',
       nextReviewId: 1005,
+      testCount1: 0,
+      testCount2:0,
+      showForm:false,
       newReview: {},
       reviews: [
         {
@@ -129,7 +182,22 @@ export default {
      */
     getNextReviewId() {
       return this.nextReviewId++;
+    },
+    testCountMethod(){
+      
+      this.testCount1 = this.testCount1+1;
+    
+    },
+    addNewReview(){
+      this.newReview.id=this.getNextReviewId();
+      this.reviews.unshift(this.newReview);
+      this.resetForm();
+    },
+    resetForm(){
+      this.newReview={};
+      this.showForm = false;
     }
+
   },
   computed: {
     averageRating() {
@@ -173,6 +241,7 @@ export default {
       return fiveStarReviews.length;
     }
   }
+  
 };
 </script>
 
