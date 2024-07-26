@@ -15,7 +15,7 @@
       <tbody>
         <tr>
           <td>
-            <input type="checkbox" id="selectAll" />
+            <input type="checkbox" id="selectAll" @click = "toggleAll" :checked="selectAll"/>
           </td>
           <td>
             <input type="text" id="firstNameFilter" v-model="filter.firstName" />
@@ -44,7 +44,7 @@
           v-bind:class="{ deactivated: user.status === 'Inactive' }"
         >
           <td>
-            <input type="checkbox" v-bind:id="user.id" v-bind:value="user.id" />
+            <input type="checkbox" v-bind:id="user.id" v-bind:value="user.id" v-model="selectedUserIDs"/>
           </td>
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
@@ -52,36 +52,46 @@
           <td>{{ user.emailAddress }}</td>
           <td>{{ user.status }}</td>
           <td>
-            <button class="btnActivateDeactivate">Activate or Deactivate</button>
+            <button class="btnActivateDeactivate" 
+            @click="flipStatus(user.id)">Activate or Deactivate</button>
           </td>
         </tr>
       </tbody>
     </table>
 
     <div class="all-actions">
-      <button>Activate Users</button>
-      <button>Deactivate Users</button>
-      <button>Delete Users</button>
+      <button @click="toActivateUsers">Activate Users</button>
+      <button @click="toInactivateUsers">Deactivate Users</button>
+      <button @click="deleteUsers">Delete Users</button>
     </div>
 
-    <button>Add New User</button>
+    <br>
+    newUser_firstName: {{ newUser.firstName }}
+    <br>
+    userMap: {{ userStatusMap }}
+     <br>
+     id: {{ users }}
+     <br>
+    <button 
+     @click= toggleVisibility
+      >Add New User</button>
 
-    <form id="frmAddNewUser">
+    <form id="frmAddNewUser" v-show="showForm===true"  @submit.prevent = "addNewReview">
       <div class="field">
         <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" />
+        <input type="text" id="firstName" name="firstName" v-model="newUser.firstName"/>
       </div>
       <div class="field">
         <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" />
+        <input type="text" id="lastName" name="lastName" v-model="newUser.lastName"/>
       </div>
       <div class="field">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" />
+        <input type="text" id="username" name="username" v-model="newUser.username"/>
       </div>
       <div class="field">
         <label for="emailAddress">Email Address:</label>
-        <input type="text" id="emailAddress" name="emailAddress" />
+        <input type="text" id="emailAddress" name="emailAddress" v-model="newUser.emailAddress"/>
       </div>
       <button type="submit" class="btn save">Save User</button>
     </form>
@@ -89,6 +99,7 @@
 </template>
 
 <script>
+import { reactive } from 'vue';
 export default {
   data() {
     return {
@@ -100,6 +111,11 @@ export default {
         status: ""
       },
       nextUserId: 7,
+      showForm: false,
+      userStatusMap:reactive( new Map()),
+      selectedUserIDs:[],
+      activeUsers: [],
+      inactiveUsers: [],
       newUser: {
         id: null,
         firstName: "",
@@ -163,7 +179,93 @@ export default {
   methods: {
     getNextUserId() {
       return this.nextUserId++;
-    }
+    },
+    toggleVisibility(){
+      this.showForm = !this.showForm;
+    },
+    addNewReview(){
+      this.newUser.id = this.getNextUserId();
+      this.users.push(this.newUser);
+      this.resetForm();
+    },
+    resetForm(){
+      this.newUser = {
+        id: null,
+        firstName: "",
+        lastName: "",
+        username: "",
+        emailAddress: "",
+        status: "Active"
+      };
+
+    },
+    flipStatus(id){
+      let arrayIndex = this.users.findIndex((user) => user.id == id);
+      if (this.users[arrayIndex].status == "Active"){
+        this.users[arrayIndex].status = "Inactive";
+      } else {
+        this.users[arrayIndex].status = "Active";
+      }
+           
+    },
+    
+    updateUserStatusMap(){
+      // Clear the existing map
+      this.userStatusMap.clear();
+
+      // Populate the map based on current user statuses
+      this.users.forEach((user) => {
+        if (!this.userStatusMap.has(user.status)) {
+          this.userStatusMap.set(user.status, []);
+        }
+        if (!this.userStatusMap.get(user.status).includes(user.id)) {
+          this.userStatusMap.get(user.status).push(user.id);
+        }
+      });
+
+      // Log the updated map for debugging
+      console.log('Updated User Status Map:', this.userStatusMap);
+    }, 
+
+    toActivateUsers(){
+      this.selectedUserIDs.forEach((id) => {
+        let arrayIndex = this.users.findIndex((user) => user.id == id);
+        if (arrayIndex !== -1) {
+          this.users[arrayIndex].status = "Active";
+        }
+      });
+      this.updateUserStatusMap();
+    },
+    toInactivateUsers(){
+      this.selectedUserIDs.forEach((id)=>{
+        let arrayIndex = this.users.findIndex((user) => user.id==id);
+        if (arrayIndex !== -1){
+          this.users[arrayIndex].status = "Inactive";
+        }
+      });
+      this.updateUserStatusMap();
+    },
+    deleteUsers(){
+      this.selectedUserIDs.forEach((id)=>{
+        let arrayIndex = this.users.findIndex((user) => user.id==id);
+        if (arrayIndex !== -1){
+          this.users.splice(arrayIndex,1);
+        }
+      });
+      this.updateUserStatusMap();
+    },
+    toggleAll() {
+      if (this.selectAll) {
+    // Deselect all if they are currently all selected
+    this.selectedUserIDs = [];
+  } else {
+    // Select all if they are not all selected
+    this.selectedUserIDs = this.users.map(user => user.id);
+  }
+    
+  },
+  
+
   },
   computed: {
     filteredList() {
@@ -202,7 +304,11 @@ export default {
         );
       }
       return filteredUsers;
-    }
+    },
+    selectAll(){
+      return this.users.length>0 && this.selectedUserIDs.length === this.users.length;
+    },
+    
   }
 };
 </script>
