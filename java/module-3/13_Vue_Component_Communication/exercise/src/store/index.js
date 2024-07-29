@@ -1,5 +1,7 @@
 import { createStore as _createStore } from 'vuex';
 
+
+
 export function createStore() {
   return _createStore({
     state: {
@@ -30,7 +32,25 @@ export function createStore() {
         }
       ]
     },
-    mutations: {},
+    mutations: {
+      updateReadStatus(state,{isbn}){
+        const book = state.books.find(book => book.isbn === isbn);
+        if(book){
+          book.read = !book.read;
+          
+        }
+      },
+      addNewBook(state, book) {
+        // Ensure the book has all required fields
+        if (book.title && book.author && book.isbn) {
+          state.books.push({
+            ...book,
+            read: false  // Default value for 'read' status
+          });
+        } 
+      }
+      
+    },
     actions: {},
     modules: {},
     // Strict should not be used in production code. It is used here as a

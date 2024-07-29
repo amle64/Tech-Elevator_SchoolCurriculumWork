@@ -1,13 +1,50 @@
 <template>
-  <div class="card">
-
+  <div :class = "cardClass">
+    <h2 class="book-title">{{ book.title }}</h2>
+    <h3 class="book-author">{{ book.author }}</h3>
+    <img class="book-image" :src="'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'" alt="Book cover image" />
+    <br>
+    
+    <button @click="toggleReadStatus" :class="buttonClass">{{book.read? 'Mark Unread':'Mark Read'}}</button>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    book: {
+      type: Object,
+      required: true
+    }
+  },
+  methods:{
+    
+    toggleReadStatus(bookId){
+      
+        this.$store.commit('updateReadStatus',{
+          isbn:this.book.isbn
+        });
+        console.log(this.book)
+      }
+    },
+    computed:{
+      cardClass(){
+        return {
+          'card':true,
+          'read':this.book.read,
+          'unread':!this.book.read
 
-}
+        }
+      },
+      buttonClass(){
+        return{
+          'mark-read':this.book.read,
+          'mark-unread':!this.book.read
+        }
+      }
+    }
+  }
+
 </script>
 
 <style>
