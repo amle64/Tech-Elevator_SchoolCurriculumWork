@@ -12,7 +12,8 @@
 
 <script>
 import MessageDetails from '../components/MessageDetails.vue';
-
+import MessageService from '../services/MessageService';
+import TopicService from '../services/TopicService';
 export default {
   components: {
     MessageDetails,
@@ -28,7 +29,16 @@ export default {
     getMessage(id) {
       
       // TODO - Get data from API and set `topics` property
-
+      MessageService.getMessage(id)
+        .then(response => {
+          this.message = response.data;
+          this.isLoading = false;
+        })
+        .catch(error => {
+          console.error('There was an error fetching the topic', error);
+          this.isLoading = false;
+        });
+      
     },
   },
   created() {

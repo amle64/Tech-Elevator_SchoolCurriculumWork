@@ -12,7 +12,7 @@
 
 <script>
 import TopicDetails from '../components/TopicDetails.vue';
-
+import TopicService from '../services/TopicService';
 export default {
   components: {
     TopicDetails
@@ -21,19 +21,27 @@ export default {
     return {
       topic: {},
       isLoading: true
-    }
+    };
   },
   methods: {
     getTopic(id) {
-
-      // TODO - Get data from API and set `topics` property
-
-    },
-  },
+      TopicService.get(id)
+        .then(response => {
+          this.topic = response.data;
+          console.log('hello this is working');
+          this.isLoading = false;
+        })
+        .catch(error => {
+          console.error('There was an error fetching the topic', error);
+          this.isLoading = false;
+        });
+    }
+  }, // <-- Correct closing bracket for the methods object
   created() {
     this.getTopic(this.$route.params.topicId);
   }
 };
+
 </script>
 
 <style scoped>
