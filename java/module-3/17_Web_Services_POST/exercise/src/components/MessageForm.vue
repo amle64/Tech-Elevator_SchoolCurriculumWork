@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import MessageService from '../services/MessageService';
 import messageService from '../services/MessageService';
 
 export default {
@@ -50,11 +51,29 @@ export default {
         
         // TODO - Do an add, then navigate Home on success.
         // For errors, call handleErrorResponse
+        MessageService.post(this.editMessage)
+        .then((response)=>{
+          this.$router.push(`/topic/${this.editMessage.topicId}`);
+        })
+        .catch(error=>{
+          this.handleErrorResponse(error);
+        });
+
+        
+
 
       } else {
         
         // TODO - Do an edit, then navigate back to Message Details on success
         // For errors, call handleErrorResponse
+        const currentMsg = this.editMessage;
+        MessageService.update(this.editMessage)
+        .then((response)=> {
+          this.$router.push(`/topic/${currentMsg.topicId}/message/${currentMsg.id}`);
+        })
+        .catch(error=>{
+          this.handleErrorResponse(error);
+        });
 
       }
     },

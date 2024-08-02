@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import TopicService from '../services/TopicService';
 export default {
   props: {
     topic: {
@@ -39,14 +40,36 @@ export default {
       }
       // Check for add or edit
       if (this.editTopic.id === 0) {
-
+        TopicService.post(this.editTopic)
+        .then((response)=>
+        {
+            this.$router.push('/');
+        })
+        .catch(error =>{
+          this.handleErrorResponse(error);
+        })
         // TODO - Do an add, then navigate Home on success.
         // For errors, call handleErrorResponse
+        
 
       } else {
 
         // TODO - Do an edit, then navigate back to Topic Details on success
         // For errors, call handleErrorResponse
+        const topicId = this.$route.params.topicId;
+        const updatedTopic = {
+          title:this.title,
+          date: new Date().toISOString()
+        }
+        TopicService.update(this.editTopic)
+        .then((response) => 
+        {
+          this.$router.push(`/topic/${topicId}`);
+        })
+        .catch(error => {
+          this.handleErrorResponse(error);
+        })
+
 
       }
     },

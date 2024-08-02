@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import topicService from '../services/TopicService.js';
+import TopicService from '../services/TopicService.js';
 import MessageSummary from '../components/MessageSummary.vue';
 
 export default {
@@ -47,7 +47,14 @@ export default {
         
         // TODO - Do a delete, then navigate Home on success
         // For errors, call handleErrorResponse
-        
+        TopicService.delete(this.topic)
+        .then((response) => 
+        {
+          this.$router.push(`/`);
+        })
+        .catch(error => {
+          this.handleErrorResponse(error);
+        })
       }
     },
     handleErrorResponse(error, verb) {
